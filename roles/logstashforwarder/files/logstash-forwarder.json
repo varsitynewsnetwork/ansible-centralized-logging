@@ -1,6 +1,6 @@
 {
   "network": {
-    "servers": [ "66.172.34.12:5000" ],
+    "servers": [ "12.34.56.78:5000" ],
     "timeout": 15,
     "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt"
   },
