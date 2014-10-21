@@ -15,14 +15,14 @@
     {
       "paths": [
         "/var/log/nginx/access.log",
-        "/home/vnnadmin/cap/*/shared/app/logs/*_access_log"
+        "/home/deploy/cap/*/shared/app/logs/*_access_log"
        ],
       "fields": { "type": "nginx-access" }
     },
     {
       "paths": [
         "/var/log/nginx/error.log",
-        "/home/vnnadmin/cap/*/shared/app/logs/*_error_log"
+        "/home/deploy/cap/*/shared/app/logs/*_error_log"
        ],
       "fields": { "type": "nginx-error" }
     },
