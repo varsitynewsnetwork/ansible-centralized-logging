@@ -37,12 +37,6 @@
         "/var/log/mysqld.log"
        ],
       "fields": { "type": "mysql" }
-    },
-    {
-      "paths": [
-        "/home/vnnadmin/cap/pressbox/shared/app/logs/*.log"
-       ],
-      "fields": { "type": "pressboxapp" }
     }
    ]
 }
