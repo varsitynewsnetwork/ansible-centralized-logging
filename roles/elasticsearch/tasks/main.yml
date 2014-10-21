@@ -1,0 +1,13 @@
+---
+- name: Import elasticsearch key
+  rpm_key: state=present key=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+- name: Add elasticsearch repo file
+  template: src=elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo
+- name: Install elasticsearch
+  yum: pkg=elasticsearch state=latest
+- name: Disable dynamic scripting
+  lineinfile: 'dest=/etc/elasticsearch/elasticsearch.yml line="script.disable_dynamic: true" regexp="^script.disable_dynamic: true" state=present insertafter=EOF'
+- name: Ensure elasticsearch is running on localhost
+  lineinfile: 'dest=/etc/elasticsearch/elasticsearch.yml line="network.host: localhost" regexp="^network.host: localhost" state=present insertafter=EOF'
+  notify:
+    - restart elasticsearch

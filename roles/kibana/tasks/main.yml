@@ -1,0 +1,34 @@
+---
+- name: ensure htpasswd is available
+  yum:  pkg=httpd-tools-2.2.15-30.el6.centos.x86_64 state=latest
+  tags: kibana
+
+- name: ensure python setup tools are installed
+  yum:  pkg=python-setuptools state=latest
+  tags: kibana
+
+- name: ensure python passlib is installed
+  easy_install: name=passlib
+  tags: kibana
+
+- name: ensure /var/www exists
+  file: path=/var/www state=directory
+  tags: kibana
+
+- name: copy kibana
+  copy: src="kibana3" dest="/var/www"
+  tags: kibana
+
+- name: copy nginx conf
+  copy: src="nginx.conf" dest="/etc/nginx/sites-available/default.conf"
+  tags: kibana
+
+- name: symlink nginx conf
+  file: src=/etc/nginx/sites-available/default.conf dest=/etc/nginx/sites-enabled/default.conf state=link
+  tags: kibana
+
+- name: generate username and password
+  htpasswd: path=/etc/nginx/conf.d/logging.mysite.com.htpasswd name=myname password=mypassword state=present
+  tags: kibana
+  notify:
+    - Nginx | Restart nginx

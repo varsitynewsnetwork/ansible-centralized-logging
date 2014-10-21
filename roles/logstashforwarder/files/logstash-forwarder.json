@@ -1,0 +1,48 @@
+{
+  "network": {
+    "servers": [ "66.172.34.12:5000" ],
+    "timeout": 15,
+    "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt"
+  },
+  "files": [
+    {
+      "paths": [
+        "/var/log/messages",
+        "/var/log/secure"
+       ],
+      "fields": { "type": "syslog" }
+    },
+    {
+      "paths": [
+        "/var/log/nginx/access.log",
+        "/home/vnnadmin/cap/*/shared/app/logs/*_access_log"
+       ],
+      "fields": { "type": "nginx-access" }
+    },
+    {
+      "paths": [
+        "/var/log/nginx/error.log",
+        "/home/vnnadmin/cap/*/shared/app/logs/*_error_log"
+       ],
+      "fields": { "type": "nginx-error" }
+    },
+    {
+      "paths": [
+        "/var/log/php-fpm/*.log"
+       ],
+      "fields": { "type": "php-fpm" }
+    },
+    {
+      "paths": [
+        "/var/log/mysqld.log"
+       ],
+      "fields": { "type": "mysql" }
+    },
+    {
+      "paths": [
+        "/home/vnnadmin/cap/pressbox/shared/app/logs/*.log"
+       ],
+      "fields": { "type": "pressboxapp" }
+    }
+   ]
+}

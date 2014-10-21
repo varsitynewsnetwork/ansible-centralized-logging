@@ -1,0 +1,9 @@
+*.swp
+.idea/
+.bundle
+.DS_Store
+.buildpath
+.project
+.settings/
+*.box
+.vagrant

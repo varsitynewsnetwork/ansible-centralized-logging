@@ -1,0 +1,3 @@
+---
+- name: ensure Java 7 is installed
+  yum: pkg=java-1.7.0-openjdk state=latest

@@ -1,0 +1,34 @@
+---
+- name: ensure elasticsearch key has been imported
+  rpm_key: state=present key=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+  tags: logstash
+
+- name: add logstash repo file
+  template: src=logstash.repo dest=/etc/yum.repos.d/logstash.repo
+  tags: logstash
+
+- name: ensure certs directory is present
+  file: path=/etc/pki/tls/certs state=directory
+  tags: logstash
+
+- name: ensure private directory is present
+  file: path=/etc/pki/tls/private state=directory
+  tags: logstash
+
+- name: copy certs
+  copy: src=certs/logstash-forwarder.crt dest=/etc/pki/tls/certs/logstash-forwarder.crt
+  tags: logstash
+
+- name: copy private key
+  copy: src=private/logstash-forwarder.key dest=/etc/pki/tls/private/logstash-forwarder.key
+  tags: logstash
+
+- name: install logstash
+  yum: pkg=logstash state=latest
+  tags: logstash
+
+- name: copy logstash configs
+  copy: src=conf.d/ dest=/etc/logstash/conf.d/
+  tags: logstash
+  notify:
+    - restart logstash

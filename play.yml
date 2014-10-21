@@ -1,0 +1,78 @@
+---
+- hosts: vagrant
+  remote_user: vagrant
+  sudo: yes
+  roles:
+    - role: vagrant
+
+- hosts: all
+  sudo: yes
+  remote_user: vnnadmin
+  roles:
+    - role: common
+
+- hosts: api_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: api
+
+- hosts: alerts_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: alerts
+
+- hosts: pressbox_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: pressbox
+
+- hosts: wordpress_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: wordpress
+
+- hosts: varnish_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: varnish
+
+- hosts: okc_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: okc
+
+- hosts: pcsathletics_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: pcsathletics
+
+- hosts: logging_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: logging
+
+- hosts: pressboxapp_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: pressboxapp
+
+- hosts: resque_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: resque
+
+- hosts: munin_hosts
+  remote_user: vnnadmin
+  sudo: yes
+  roles:
+    - role: munin

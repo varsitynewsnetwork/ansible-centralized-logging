@@ -1,0 +1,5 @@
+---
+- name: ensure selinux python bindings are installed
+  yum: pkg=libselinux-python state=latest
+- name: ensure selinux is disabled
+  selinux: state=disabled

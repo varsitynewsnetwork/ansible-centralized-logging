@@ -1,0 +1,36 @@
+---
+- name: download logstash forwarder
+  get_url: url=http://packages.elasticsearch.org/logstashforwarder/centos/logstash-forwarder-0.3.1-1.x86_64.rpm dest=/tmp
+  tags: logstashforwarder
+
+- name: install logstash forwarder package
+  yum: name=/tmp/logstash-forwarder-0.3.1-1.x86_64.rpm state=present
+  tags: logstashforwarder
+
+- name: copy init script
+  copy: src=logstash-forwarder-init dest=/etc/init.d/logstash-forwarder mode="0755"
+  tags: logstashforwarder
+
+- name: copy sysconfig
+  copy: src=logstash-forwarder-sysconfig dest=/etc/sysconfig/logstash-forwarder
+  tags: logstashforwarder
+
+- name: ensure certs directory is present
+  file: path=/etc/pki/tls/certs state=directory
+  tags: logstashforwarder
+
+- name: ensure log directory is present
+  file: path=/var/log/forwarder state=directory
+  tags: logstashforwarder
+
+- name: copy certs
+  copy: src=logstash-forwarder.crt dest=/etc/pki/tls/certs/logstash-forwarder.crt
+  tags: logstashforwarder
+
+- name: copy logstash forwarder config
+  copy: src=logstash-forwarder.json dest=/etc/logstash-forwarder
+  tags: logstashforwarder
+
+- name: add logstash forwarder service
+  service: name=logstash-forwarder state=started enabled=yes
+  tags: logstashforwarder
